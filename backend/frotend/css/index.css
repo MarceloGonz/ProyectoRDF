@@ -1,0 +1,81 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    font-size: 16px;
+    --negro: #1E1F28;
+    --fondo: #ffffff;
+    --fondoGris: #FAFAFA;
+    --amarillo: #C9932C;
+    --azul: #3d405b;
+    --size: 1.9rem;
+}
+
+header{
+    width: 100vw;
+    height: 10vh;
+    background: rgb(0,6,36);
+    background: linear-gradient(90deg, rgba(0,6,36,1) 0%, rgba(38,64,96,1) 48%, rgba(30,109,125,1) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+header #busquedatxt{
+height: 35px;
+}
+header #btnBuscar{
+    height: 35px;
+    }
+main{
+    display: grid;
+    grid-template-columns: 18vw 82vw;
+}
+h1{
+    color: var(--fondo);
+
+}
+.containerIzquierda{
+    height: 89vh;
+    background: rgb(0,6,36);
+    width: 18vw;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-content: flex-start;
+}
+
+.containerIzquierda img{
+    max-width: 18vw;
+    width: 17vw;
+    border-radius: 3px;
+    border: solid white 1px;
+}
+.containerIzquierda h2{
+    color: var(--fondo);
+    font-weight: normal;
+    font-size: 12px;
+    text-align: justify;
+    margin: 3px;
+}
+.containerIzquierda span{
+    color: var(--fondo);
+    font-weight: bold;
+    font-size: 14px;
+    text-align: justify;
+}
+.containerIzquierda .conDesc{
+    width: 17vw;
+    height: 17vh;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+.containerDerecha{
+grid-column: 2/3;
+grid-row: 1/2;
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
