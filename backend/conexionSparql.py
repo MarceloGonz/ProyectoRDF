@@ -10,20 +10,20 @@ sparql = SPARQLWrapper(
 sparql.setReturnFormat(JSON)
 def ConsultarSparql (uriPerson):
     sparql.setQuery("""
-
         SELECT * 
         WHERE
         {
         <%s> dbo:abstract ?abstract .
         OPTIONAL {<%s>  dbo:birthDate ?nacimiento.}
-        OPTIONAL {<%s> dbo:birthPlace/rdfs:label ?lugarNacimiento.}
+        OPTIONAL {<%s> dbo:birthPlace/rdfs:label ?lugarNacimiento. }
         OPTIONAL {<%s> rdfs:label ?nombre.}
         OPTIONAL {<%s> dbo:thumbnail ?imagen.}
-        FILTER(LANG(?abstract)="en")
+        OPTIONAL {<%s> dbo:deathDate ?muerte.}
+        FILTER(LANG(?abstract)="es" ||LANG(?abstract)="en")
         FILTER(LANG(?nombre)="en")
         FILTER(LANG(?lugarNacimiento)="en")
         }
-        """%(uriPerson,uriPerson,uriPerson,uriPerson,uriPerson)
+        """%(uriPerson,uriPerson,uriPerson,uriPerson,uriPerson,uriPerson)
     )
     try:
         ret = sparql.queryAndConvert()
@@ -34,7 +34,7 @@ def ConsultarSparql (uriPerson):
 
 def ConsultarSparqlPersonas (uriPerson):
     sparql.setQuery("""
-    SELECT DISTINCT ?p MIN(?o) ?nombre ?etiqueta
+    SELECT DISTINCT  ?p  ?nombre  MIN(?etiqueta)
     WHERE
     {
    <%s> ?o ?p.
@@ -43,8 +43,7 @@ def ConsultarSparqlPersonas (uriPerson):
     OPTIONAL {?p rdfs:label ?nombre.}
     FILTER(LANG(?nombre)="en")
     FILTER(LANG(?etiqueta)="en")
-
-    }
+    }ORDER BY (?p)
         """%(uriPerson)
     )
     try:
