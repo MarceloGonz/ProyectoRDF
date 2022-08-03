@@ -38,6 +38,7 @@ canvas{
     border: solid rgba(30,109,125,1)  1px;
     border-radius: 3px;
 }
+
 ::-webkit-scrollbar {
     display: none;
   }

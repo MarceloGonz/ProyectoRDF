@@ -11,4 +11,13 @@ def consultaSpootligth (consulta):
         respuesta = data.json()
         return(respuesta["Resources"][0]["@URI"])
 
+
+
+def Cimg (url):
+    query = url
+    data = requests.get(query) 
+    print(data.status_code)
+    #if data.status_code==200:
+     #   respuesta = data.json()
+    #return(respuesta["Resources"][0]["@URI"])
 #consultaSpootligth("Gabriel García Márquez")

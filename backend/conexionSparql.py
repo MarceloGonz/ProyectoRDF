@@ -34,13 +34,14 @@ def ConsultarSparql (uriPerson):
 
 def ConsultarSparqlPersonas (uriPerson):
     sparql.setQuery("""
-    SELECT DISTINCT  ?p  ?nombre  MIN(?etiqueta)
+    SELECT DISTINCT  ?p  ?nombre  MIN(?etiqueta) ?imagen
     WHERE
     {
    <%s> ?o ?p.
    ?o rdfs:label ?etiqueta.
     ?p rdf:type foaf:Person.
     OPTIONAL {?p rdfs:label ?nombre.}
+    OPTIONAL {?p dbo:thumbnail ?imagen.}
     FILTER(LANG(?nombre)="en")
     FILTER(LANG(?etiqueta)="en")
     }ORDER BY (?p)

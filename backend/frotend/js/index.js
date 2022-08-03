@@ -56,7 +56,7 @@ var canvas = d3.select("#network"),
     height = canvas.attr("height"),
     ctx = canvas.node().getContext("2d"),
     ctx2 = canvas.node().getContext("2d"),
-    r = 20,
+    r = 40,
     color = d3.scaleOrdinal(d3.schemeCategory20),
     simulation = d3.forceSimulation()
         .force("x", d3.forceX(width / 2))
@@ -66,7 +66,6 @@ var canvas = d3.select("#network"),
             .strength(-10500))
         .force("link", d3.forceLink()
             .id(function (d) { return d.name; }));
-
 d3.json("datos.json", function (err, graph) {
 
     if (err) throw err;
@@ -87,9 +86,10 @@ d3.json("datos.json", function (err, graph) {
     function update() {
         ctx.clearRect(0, 0, width, height);
         ctx2.clearRect(0, 0, width, height);
-
+        
         ctx.beginPath();
-        ctx2.beginPath();
+        //ctx2.beginPath();
+        
         ctx.globalAlpha = 0.3;
         ctx.strokeStyle = "#000";
         ctx2.globalAlpha = 0.8;
@@ -131,6 +131,9 @@ function dragended() {
 }
 
 function drawNode(d) {
+    var img = new Image();
+    
+    img.src=d.photo;
     ctx.beginPath();
     ctx.fillStyle = color(d.party);
     ctx.moveTo(d.x, d.y);
@@ -140,7 +143,9 @@ function drawNode(d) {
     ctx.textAlign = "center"
     ctx.font = "10pt sans-serif";
     ctx.strokeStyle = "black";
-    ctx.strokeText(d.name, d.x, d.y);
+    ctx.strokeText(d.name, d.x, d.y+r+15);
+    ctx2.drawImage(img,d.x-(r/2), d.y-(r/2),r+15,r+15);
+    //ctx2.drawImage(img,d.x, d.y);
 
 }
 

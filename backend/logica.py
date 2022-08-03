@@ -5,7 +5,7 @@ import json
 from tkinter.messagebox import NO
 from conexionSparql import ConsultarSparql
 from conexionSparql import ConsultarSparqlPersonas
-from conexionSpootligth import consultaSpootligth
+from conexionSpootligth import consultaSpootligth,Cimg
 
 
 def consultaPersonaje (consulta):
@@ -44,10 +44,7 @@ def CrearNodos (consultaPersona):
     if(consultaPersona.get("muerte")!=None):
         NodeP["muere"] =consultaPersona["muerte"]["value"]    
 
-    #NodeP["resumen"] =consultaPersona["abstract"]["value"]
-    #NodeP["fechaNacimiento"] =consultaPersona["nacimiento"]["value"]
-    #NodeP["LugarNacimiento"] =consultaPersona["lugarNacimiento"]["value"]
-    #NodeP["photo"] =consultaPersona["imagen"]["value"]
+
     Estructura["nodes"].append(NodeP)
     for row in consultaPersona["conectados"]:
         if(tipoEnlace!=row["callret-2"]["value"]):   
@@ -77,7 +74,11 @@ def CrearNodos (consultaPersona):
                     link["nombre"] = "Enlazado por\nWikipedia"
                 else:
                     link["nombre"] = row["callret-2"]["value"]
-
+                if(row.get("imagen")!=None):
+                    Cimg(row["imagen"]["value"])
+                    node["photo"] = row["imagen"]["value"]
+                else:
+                    node["photo"] = "img/hot-dog.png"
                 node["name"] = row["nombre"]["value"]
                 Estructura["nodes"].append(node)
                 Estructura["links"].append(link)
@@ -86,3 +87,4 @@ def CrearNodos (consultaPersona):
 
     return json_Estructura
 
+consultaPersonaje("Gabriel Garcia Marquez")
